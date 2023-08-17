@@ -31,6 +31,15 @@ function App() {
     let newTasks = [newTask, ...tasks]
     setTasks(newTasks)
   }
+  // Изменение статуса
+  function changeStatus(taskId: string, isDone: boolean) {
+    let task = tasks.find(t => t.id === taskId)
+    if(task) {
+      task.isDone = isDone
+    }
+    setTasks([...tasks])
+  }
+
   
   // Фильтрация задач по выбранному фильтру
   let tasksForTodolist = tasks
@@ -44,7 +53,7 @@ function App() {
   return (
     <div className="App">
       {/* Компонент Todolist */}
-      <Todolist title = {'What to learn'} tasks={tasksForTodolist} removeTask={removeTask} changeFilter={changeFilter} addTask={addTask} />
+      <Todolist title = {'What to learn'} tasks={tasksForTodolist} removeTask={removeTask} changeFilter={changeFilter} addTask={addTask} changeTaskStatus={changeStatus} />
       {/* Другие компоненты Todolist */}
     </div>
   );
