@@ -8,10 +8,11 @@ export type TaskProps = {
 }
 
 type Props = {
+  id: string
   title: string
   tasks: Array<TaskProps>
   removeTask: (id: string) => void
-  changeFilter: (value: FilterValuesType) => void
+  changeFilter: (value: FilterValuesType, todolistId: string) => void
   addTask: (title: string) => void
   changeTaskStatus: (taskId: string, isDone: boolean) => void
   filter: FilterValuesType
@@ -55,17 +56,17 @@ export function Todolist(props: Props) {
 
   // Обработчик изменения фильтра на "All"
   const onAllChangeFilter = () => {
-    props.changeFilter('all')
+    props.changeFilter('all', props.id)
   }
 
   // Обработчик изменения фильтра на "Active"
   const onActiveChangeFilter = () => {
-    props.changeFilter('active')
+    props.changeFilter('active', props.id)
   }
 
   // Обработчик изменения фильтра на "Completed"
   const onCompletedChangeFilter = () => {
-    props.changeFilter('completed')
+    props.changeFilter('completed', props.id)
   }
 
   return (
