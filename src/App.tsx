@@ -53,7 +53,13 @@ function App() {
   return (
     <div className="App">
       {/* Компонент Todolist */}
-      <Todolist title = {'What to learn'} tasks={tasksForTodolist} removeTask={removeTask} changeFilter={changeFilter} addTask={addTask} changeTaskStatus={changeStatus} />
+      <Todolist title = {'What to learn'}
+                tasks={tasksForTodolist} 
+                removeTask={removeTask} 
+                changeFilter={changeFilter} 
+                addTask={addTask} 
+                changeTaskStatus={changeStatus}
+                filter={filter} />
       {/* Другие компоненты Todolist */}
     </div>
   );
