@@ -11,10 +11,10 @@ type Props = {
   id: string
   title: string
   tasks: Array<TaskProps>
-  removeTask: (id: string) => void
+  removeTask: (id: string, todolistId: string) => void
   changeFilter: (value: FilterValuesType, todolistId: string) => void
-  addTask: (title: string) => void
-  changeTaskStatus: (taskId: string, isDone: boolean) => void
+  addTask: (title: string, todolistId: string) => void
+  changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
   filter: FilterValuesType
 }
 
@@ -33,7 +33,7 @@ export function Todolist(props: Props) {
   const onKeyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (newTaskTitle.trim()) {
-        props.addTask(newTaskTitle)
+        props.addTask(newTaskTitle, props.id)
         setNewTaskTitle('')
       } else {
         setError('Заполните поле')
@@ -45,7 +45,7 @@ export function Todolist(props: Props) {
   // Обработчик добавления новой задачи при клике на кнопку "+"
   const addingNewTaskHandler = () => {
     if (newTaskTitle.trim()) {
-      props.addTask(newTaskTitle.trim())
+      props.addTask(newTaskTitle.trim(), props.id)
       setNewTaskTitle('')
     } else {
       setError('Заполните поле')
@@ -82,9 +82,9 @@ export function Todolist(props: Props) {
         <ul>
           {props.tasks.map((task) => {
 
-            const removeTaskHandler = () => {props.removeTask(task.id)}
+            const removeTaskHandler = () => {props.removeTask(task.id, props.id)}
             const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-              props.changeTaskStatus(task.id, e.currentTarget.checked)
+              props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)
             }
             return (
               <li key={task.id}
