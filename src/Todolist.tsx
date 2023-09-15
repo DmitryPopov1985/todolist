@@ -14,6 +14,7 @@ type Props = {
   removeTask: (id: string, todolistId: string) => void
   changeFilter: (value: FilterValuesType, todolistId: string) => void
   addTask: (title: string, todolistId: string) => void
+  removeTodolist: (todolistId: string) => void
   changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
   filter: FilterValuesType
 }
@@ -53,7 +54,9 @@ export function Todolist(props: Props) {
 
     setNewTaskTitle('')
   }
-
+const removeTodolistHandler = () => {
+  props.removeTodolist(props.id)
+}
   // Обработчик изменения фильтра на "All"
   const onAllChangeFilter = () => {
     props.changeFilter('all', props.id)
@@ -71,7 +74,7 @@ export function Todolist(props: Props) {
 
   return (
     <div>
-      <h3>{props.title}</h3>
+      <h3>{props.title} <button onClick={removeTodolistHandler} >+</button> </h3>
       <div>
         <input value={newTaskTitle}
                onKeyDown={onKeyDownHandler}
