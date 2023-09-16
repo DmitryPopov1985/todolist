@@ -1,5 +1,6 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { FilterValuesType } from './App';
+import AddItemForm from './AddItemForm';
 
 export type TaskProps = {
   id: string
@@ -21,39 +22,8 @@ type Props = {
 
 export function Todolist(props: Props) {
 
-  const [newTaskTitle, setNewTaskTitle] = useState('')
-  const [error, setError] = useState<string | null>(null)
 
-  // Обработчик изменения значения поля ввода новой задачи
-  const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTaskTitle(e.currentTarget.value)
-    setError(null)
-  }
 
-  // Обработчик нажатия клавиши "Enter" в поле ввода новой задачи
-  const onKeyDownHandler = (e:KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      if (newTaskTitle.trim()) {
-        props.addTask(newTaskTitle, props.id)
-        setNewTaskTitle('')
-      } else {
-        setError('Заполните поле')
-      }
-      setNewTaskTitle('')
-    }
-  }
-
-  // Обработчик добавления новой задачи при клике на кнопку "+"
-  const addingNewTaskHandler = () => {
-    if (newTaskTitle.trim()) {
-      props.addTask(newTaskTitle.trim(), props.id)
-      setNewTaskTitle('')
-    } else {
-      setError('Заполните поле')
-    }
-
-    setNewTaskTitle('')
-  }
 const removeTodolistHandler = () => {
   props.removeTodolist(props.id)
 }
@@ -76,12 +46,7 @@ const removeTodolistHandler = () => {
     <div>
       <h3>{props.title} <button onClick={removeTodolistHandler} >+</button> </h3>
       <div>
-        <input value={newTaskTitle}
-               onKeyDown={onKeyDownHandler}
-               onChange={onNewTitleChangeHandler}
-               className={error ? 'error' : '' }/>
-        <button onClick={addingNewTaskHandler}>+</button>
-        {error && <div className="error-message">{error}</div>}
+        <AddItemForm addTask={props.addTask } id={props.id}/>
         <ul>
           {props.tasks.map((task) => {
 
@@ -111,3 +76,6 @@ const removeTodolistHandler = () => {
     </div>
   );
 }
+
+
+

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TaskProps, Todolist } from './Todolist';
 import './App.css';
 import { v1 } from 'uuid';
+import AddItemForm from './AddItemForm';
 
 export type FilterValuesType = 'all'| 'active' | 'completed'
 type TodoListType = {
@@ -52,7 +53,7 @@ function App() {
   
   let [todolists, setTodolists] = useState<Array<TodoListType>>([
     {id: todolistId1, title: 'Что изучить', filter: 'all'},
-    {id: todolistId2, title: 'Что купить', filter: 'active'}
+    {id: todolistId2, title: 'Что купить', filter: 'all'}
   ]) 
 
   function removeTodolist(todolistId: string) {
@@ -76,6 +77,9 @@ function App() {
   })
   return (
     <div className="App">
+      <AddItemForm addTask={function (title: string, todolistId: string): void {
+        throw new Error('Function not implemented.');
+      } } id={''}/>
       {
         todolists.map( tl => {
           // Фильтрация задач по выбранному фильтру
