@@ -1,8 +1,8 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent} from 'react';
 import { FilterValuesType } from './App';
 import AddItemForm from './AddItemForm';
 
-export type TaskProps = {
+export type TaskType = {
   id: string
   title: string
   isDone: boolean
@@ -11,7 +11,7 @@ export type TaskProps = {
 type Props = {
   id: string
   title: string
-  tasks: Array<TaskProps>
+  tasks: Array<TaskType>
   removeTask: (id: string, todolistId: string) => void
   changeFilter: (value: FilterValuesType, todolistId: string) => void
   addTask: (title: string, todolistId: string) => void
@@ -42,11 +42,14 @@ const removeTodolistHandler = () => {
     props.changeFilter('completed', props.id)
   }
 
+  const addTask = (title: string) => {
+    props.addTask(title, props.id)
+  }
   return (
     <div>
       <h3>{props.title} <button onClick={removeTodolistHandler} >+</button> </h3>
       <div>
-        <AddItemForm addTask={props.addTask } id={props.id}/>
+        <AddItemForm addItem={addTask } />
         <ul>
           {props.tasks.map((task) => {
 

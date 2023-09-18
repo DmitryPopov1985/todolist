@@ -1,8 +1,8 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 type PropsAddItemFormType = {
-  addTask: (title: string, todolistId: string) => void;
-  id: string;
+  addItem: (title: string) => void;
+  
 };
 export default function AddItemForm(props: PropsAddItemFormType) {
   const [newTaskTitle, setNewTaskTitle] = useState('');
@@ -12,7 +12,7 @@ export default function AddItemForm(props: PropsAddItemFormType) {
   const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (newTaskTitle.trim()) {
-        props.addTask(newTaskTitle, props.id);
+        props.addItem(newTaskTitle);
         setNewTaskTitle('');
       } else {
         setError('Заполните поле');
@@ -29,7 +29,7 @@ export default function AddItemForm(props: PropsAddItemFormType) {
   // Обработчик добавления новой задачи при клике на кнопку "+"
   const addingNewTaskHandler = () => {
     if (newTaskTitle.trim()) {
-      props.addTask(newTaskTitle.trim(), props.id);
+      props.addItem(newTaskTitle.trim());
       setNewTaskTitle('');
     } else {
       setError('Заполните поле');
