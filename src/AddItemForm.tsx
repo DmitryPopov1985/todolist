@@ -1,4 +1,6 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { AddTaskOutlined } from '@mui/icons-material';
+import { Button, TextField } from '@mui/material';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 type PropsAddItemFormType = {
   addItem: (title: string) => void;
@@ -39,12 +41,23 @@ export default function AddItemForm(props: PropsAddItemFormType) {
 
   return (
     <div>
-      <input value={newTaskTitle}
+      <TextField
+        label="Введите текст"
+        variant='outlined'
+        value={newTaskTitle}
         onKeyDown={onKeyDownHandler}
         onChange={onNewTitleChangeHandler}
-        className={error ? 'error' : ''} />
-      <button onClick={addingNewTaskHandler}>+</button>
-      {error && <div className="error-message">{error}</div>}
+        error={!!error}
+        helperText={error}
+        sx={{paddingBottom: '10px'}}
+      />
+      <Button
+        onClick={addingNewTaskHandler}
+        variant="text"
+        sx={{padding: '18px 15px'}}
+        startIcon={<AddTaskOutlined fontSize="small" />
+      }
+      ></Button>
     </div>
   );
 }

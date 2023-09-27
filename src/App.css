@@ -1,19 +1,11 @@
-.App {
-  display: flex;
-  padding: 30px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.App>div {
-  margin-right: 50px;
-}
-.error {
-  border: red 1px solid;
-}
-.error-message {
-  color: red;
-}
-.active-filter {
-  background-color: aquamarine;
-}
-.is-done {
-  opacity: 0.5;
+
+ul,
+ol,
+li {
+  list-style-type: none;
 }
